@@ -1,35 +1,50 @@
 # TO-DO: complete the helper function below to merge 2 sorted arrays
 def merge(arrA, arrB):
     elements = len(arrA) + len(arrB)
-    merge_arr = [0] * elements
+    merged_arr = [0] * elements
 
-    # Your code here
-    L = arrA
-    R = arrB
-    i = j = k = 0
-
-    while i < len(L) and j < len(R):
-        if L[i] < R[j]:
-            merge_arr[k] = L[i]
-            i += 1
+    a, b = 0, 0
+    for i in range(len(merged_arr)):
+        if a >= len(arrA):
+            merged_arr[i] = arrB[b]
+            b += 1
+        elif b >= len(arrB):
+            merged_arr[i] = arrA[a]
+            a += 1
+        elif arrA[a] < arrB[b]:
+            merged_arr[i] = arrA[a]
+            a += 1
         else:
-            merge_arr[k] = R[j]
-            j += 1
-        k += 1
+            merged_arr[i] = arrB[b]
+            b += 1
+    return merged_arr
 
-    # Checking if any element was left
-    while i < len(L):
-        merge_arr[k] = L[i]
-        i += 1
-        k += 1
+    # L = arrA
+    # R = arrB
+    # i = j = k = 0
 
-    # Checking if any element was right
-    while j < len(R):
-        merge_arr[k] = R[j]
-        j += 1
-        k += 1
+    # while i < len(L) and j < len(R):
+    #     if L[i] < R[j]:
+    #         merge_arr[k] = L[i]
+    #         i += 1
+    #     else:
+    #         merge_arr[k] = R[j]
+    #         j += 1
+    #     k += 1
 
-    return merge_arr
+    # # Checking if any element was left
+    # while i < len(L):
+    #     merge_arr[k] = L[i]
+    #     i += 1
+    #     k += 1
+
+    # # Checking if any element was right
+    # while j < len(R):
+    #     merge_arr[k] = R[j]
+    #     j += 1
+    #     k += 1
+
+    # return merge_arr
 
 
 # TO-DO: implement the Merge Sort function below recursively
