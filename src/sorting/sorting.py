@@ -1,53 +1,55 @@
 # TO-DO: complete the helper function below to merge 2 sorted arrays
 def merge(arrA, arrB):
     elements = len(arrA) + len(arrB)
-    merged_arr = [0] * elements
+    merge_arr = [0] * elements
 
     # Your code here
-    if len(arrA) > 1:
-        mid = len(arrA) // 2  # Finding the mid of the array
-        L = arrA[:mid]  # Dividing the array elements
-        R = arrA[mid:]
+    L = arrA
+    R = arrB
+    i = j = k = 0
 
-    return merged_arr
+    while i < len(L) and j < len(R):
+        if L[i] < R[j]:
+            merge_arr[k] = L[i]
+            i += 1
+        else:
+            merge_arr[k] = R[j]
+            j += 1
+        k += 1
+
+    # Checking if any element was left
+    while i < len(L):
+        merge_arr[k] = L[i]
+        i += 1
+        k += 1
+
+    # Checking if any element was right
+    while j < len(R):
+        merge_arr[k] = R[j]
+        j += 1
+        k += 1
+
+    return merge_arr
+
 
 # TO-DO: implement the Merge Sort function below recursively
 
-
 def merge_sort(arr):
     # Your code here
-    if len(arr) > 1:
-        mid = len(arr) // 2  # Finding the mid of the array
-        L = arr[:mid]  # Dividing the array elements
-        R = arr[mid:]  # into 2 halves
+    if len(arr) <= 1:
+        return arr
 
-        merge_sort(L)  # Sorting the first half
-        merge_sort(R)  # Sorting the second half
+    mid = len(arr) // 2  # Finding the mid of the array
+    L = arr[:mid]
+    R = arr[mid:]
 
-        i = j = k = 0
+    L = merge_sort(L)
+    R = merge_sort(R)
 
-        while i < len(L) and j < len(R):
-            if L[i] < R[j]:
-                arr[k] = L[i]
-                i += 1
-            else:
-                arr[k] = R[j]
-                j += 1
-            k += 1
-
-        # Checking if any element was left
-        while i < len(L):
-            arr[k] = L[i]
-            i += 1
-            k += 1
-
-        # Checking if any element was right
-        while j < len(R):
-            arr[k] = R[j]
-            j += 1
-            k += 1
+    arr = merge(L, R)
 
     return arr
+
 
 # STRETCH: implement the recursive logic for merge sort in a way that doesn't
 # utilize any extra memory
